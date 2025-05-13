@@ -1,0 +1,233 @@
+/* Общие стили для всей страницы */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* Более современный набор системных шрифтов */
+    margin: 0;
+    background-color: #f4f7fa; /* Светло-голубовато-серый фон */
+    color: #334155; /* Немного приглушенный основной цвет текста */
+    line-height: 1.6; /* Улучшает читаемость текста */
+}
+
+.container {
+    display: flex; /* Включаем Flexbox для расположения сайдбара и основного контента в ряд */
+    width: 100%;
+    min-height: 100vh; /* Контейнер будет высотой как минимум во весь экран */
+}
+
+/* --- Стили для сайдбара --- */
+.sidebar {
+    width: 80px; /* Узкий сайдбар */
+    background-color: #ffffff; /* Белый фон */
+    border-right: 1px solid #e8eaf0; /* Мягкая граница */
+    display: flex;
+    flex-direction: column; /* Элементы внутри сайдбара будут идти сверху вниз */
+    align-items: center; /* Центрируем иконки по горизонтали */
+    padding: 25px 0; /* Отступы сверху/снизу */
+    transition: width 0.3s ease; /* Плавный переход для возможного расширения в будущем */
+}
+
+.sidebar-logo {
+    margin-bottom: 30px;
+}
+
+.sidebar-logo .icon-logo {
+    font-size: 28px; /* Размер "логотипа" */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px; /* Размер круглого фона для лого */
+    height: 48px;
+    border-radius: 50%; /* Делаем фон круглым */
+    background: linear-gradient(135deg, #7f00ff, #e100ff); /* Пример градиента */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Расстояние между иконками навигации */
+    width: 100%;
+}
+
+.sidebar-bottom-nav {
+    margin-top: auto; /* Прижимает этот блок к низу сайдбара */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; /* Размер кликабельной области иконки */
+    height: 44px;
+    border-radius: 10px; /* Скругление для фона иконки */
+    text-decoration: none;
+    color: #5a6b8c; /* Цвет иконок по умолчанию */
+    position: relative; /* Для позиционирования индикатора активного элемента */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-item .icon {
+    font-size: 22px; /* Размер самих иконок-символов */
+}
+
+.nav-item:hover {
+    background-color: #f0f2f5; /* Легкий фон при наведении */
+    color: #2a3959;
+}
+
+.nav-item.active {
+    color: #6a0dad; /* Цвет активной иконки (фиолетовый) */
+    background-color: #e8e0f5; /* Легкий фон для активного элемента */
+}
+
+.nav-item.active::before {
+    content: "";
+    position: absolute;
+    left: 0px; /* Позиция индикатора */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 28px;
+    background-color: #6a0dad; /* Фиолетовый индикатор */
+    border-radius: 0 4px 4px 0; /* Скругление для индикатора */
+}
+
+/* --- Стили для основного контента --- */
+.main-content {
+    flex-grow: 1; /* Основной контент займет все оставшееся место */
+    padding: 25px;
+    background-color: #ffffff;
+    margin: 20px;
+    border-radius: 12px; /* Больше скругление */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Мягкая тень */
+    display: flex;
+    flex-direction: column; /* main-header будет над page-body-columns */
+}
+
+.main-header h1 {
+    font-size: 26px; /* Немного увеличил */
+    color: #1e293b; /* Более темный и насыщенный цвет для заголовка */
+    margin-top: 0;
+    margin-bottom: 25px; /* Отступ снизу */
+    font-weight: 600; /* Полужирное начертание */
+}
+
+/* --- Стили для двухколоночной структуры (инфо-блоки и карта) --- */
+.page-body-columns {
+    display: flex;
+    gap: 20px; /* Промежуток между левой и правой колонками */
+    flex-grow: 1; /* Позволяем этому блоку занять доступную высоту в .main-content */
+    overflow: hidden; /* Предотвращает выход контента за пределы, если что-то пойдет не так с высотами */
+}
+
+.info-column-left {
+    flex: 0 0 35%; /* Базовая ширина 35%, не расти, не сжиматься */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Промежуток между info-block-1 и info-block-2 */
+}
+
+.info-block {
+    background-color: #ffffff; /* Явный белый фон для карточек */
+    padding: 20px;
+    border-radius: 8px; /* Скругление углов карточек */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Легкая тень для каждого блока */
+    /* border: 1px solid #e8eaf0; -- убрали явную границу, используем тень */
+}
+
+.info-block h2 {
+    margin-top: 0;
+    font-size: 18px; /* Можно настроить */
+    color: #1e293b; /* В_ тон заголовку H1 */
+    font-weight: 600;
+}
+
+.info-block h3 {
+    margin-top: 0;
+    font-size: 16px; /* Можно настроить */
+    color: #334155;
+    font-weight: 600;
+}
+
+.map-column-right {
+    flex: 1 1 auto; /* Занимает оставшееся пространство */
+    display: flex;
+    flex-direction: column; /* Помогает #map занять всю высоту */
+    min-width: 0; /* Важно для flex-элементов, чтобы они могли сжиматься и не вызывать переполнение */
+}
+
+#map {
+    width: 100%; /* Карта займет всю ширину своей колонки */
+    height: 100%; /* Карта займет всю высоту .map-column-right */
+    min-height: 500px; /* Минимальная высота карты, чтобы она не схлопывалась */
+    background-color: #e9e9e9; /* Временный фон, пока карта грузится */
+    border-radius: 8px; /* Скругление для контейнера карты */
+}
+
+/* --- Стили для элементов управления Leaflet --- */
+.leaflet-control-zoom a {
+    width: 30px !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    font-size: 1.5em !important;
+    border-radius: 4px !important; /* Добавим скругление кнопкам зума */
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+    font-size: 14px;
+}
+
+.leaflet-control-attribution {
+    font-size: 10px; /* Можно сделать чуть крупнее, если нужно: 11px или 12px */
+}
+
+/* --- ЗАКОММЕНТИРОВАННЫЕ СТАРЫЕ СТИЛИ (для предыдущей компоновки) --- */
+
+/*
+.info-display-area {
+    display: flex; // Располагали инфо-блоки в ряд
+    gap: 20px;
+    margin-bottom: 30px;
+}
+*/
+
+/*
+// flex-basis и flex-grow для .info-block были актуальны,
+// когда .info-display-area был их flex-контейнером.
+// Сейчас эти свойства не нужны непосредственно для .info-block.
+// .info-block {
+//    background-color: #f9f9f9; // Старый фон
+//    padding: 20px;
+//    border-radius: 6px;
+//    border: 1px solid #eee; // Старая граница
+//    flex-basis: 0;
+//    flex-grow: 1;
+// }
+*/
+
+/*
+.map-area {
+    // Этот класс-обертка для карты больше не используется в новой структуре
+    margin-bottom: 20px;
+}
+*/
+
+/*
+// Старая высота и стили карты, когда она была в полной ширине под инфо-блоками
+// #map {
+//    width: 100%;
+//    height: 400px; // Старая высота
+//    background-color: #e9e9e9;
+//    border-radius: 6px;
+//    display: flex; // Старые стили для центрирования плейсхолдера
+//    align-items: center;
+//    justify-content: center;
+//    color: #777;
+// }
+*/

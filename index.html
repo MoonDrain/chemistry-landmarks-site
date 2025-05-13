@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ХимДостопримечательности СПб</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <span class="icon-logo">🧪</span> </div>
+    <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" title="Главная">
+            <span class="icon">🏠</span>
+        </a>
+        <a href="#" class="nav-item" title="Статистика (пример)">
+            <span class="icon">📊</span>
+        </a>
+        <a href="#" class="nav-item" title="Места на карте">
+            <span class="icon">📍</span>
+        </a>
+        <a href="#" class="nav-item" title="Настройки (пример)">
+            <span class="icon">⚙️</span>
+        </a>
+    </nav>
+    <div class="sidebar-bottom-nav">
+        <a href="#" class="nav-item" title="Профиль (пример)">
+            <span class="icon">👤</span>
+        </a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Достопримечательности химических открытий Санкт-Петербурга</h1>
+    </header>
+
+    <div class="page-body-columns">
+
+        <div class="info-column-left">
+            <div class="info-block" id="info-block-1">
+                <h2>Название объекта</h2>
+                <p>Краткое описание выбранного объекта появится здесь...</p>
+            </div>
+            <div class="info-block" id="info-block-2">
+                <h3>Детали</h3>
+                <p>Дополнительные детали или интересные факты...</p>
+            </div>
+        </div>
+
+        <div class="map-column-right">
+            <div id="map">
+                </div>
+        </div>
+
+    </div> </main>
+
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
