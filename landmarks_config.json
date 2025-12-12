@@ -1,0 +1,162 @@
+{
+  "project_info": {
+    "name": "ХимДостопримечательности Санкт-Петербурга",
+    "version": "1.0.0",
+    "created_date": "2025-12-12",
+    "last_updated": "2025-12-12",
+    "author": "MoonDrain",
+    "repository_url": "https://github.com/MoonDrain/chemistry-landmarks-site",
+    "description": "Ориентированные данные о химических достопримечательностях Санкт-Петербурга"
+  },
+  "map_settings": {
+    "provider": "openstreetmap",
+    "center": {
+      "latitude": 59.9311,
+      "longitude": 30.3609,
+      "zoom_level": 11
+    },
+    "map_tiles": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "attribution": "OpenStreetMap Contributors",
+    "max_zoom": 18,
+    "min_zoom": 9
+  },
+  "landmark_categories": [
+    {
+      "id": "cat_001",
+      "name": "monuments",
+      "display_name": "Памятники",
+      "icon_color": "#FF6B6B",
+      "description": "Памятники выдающимся химикам"
+    },
+    {
+      "id": "cat_002",
+      "name": "laboratories",
+      "display_name": "Лаборатории",
+      "icon_color": "#4ECDC4",
+      "description": "Места обработки химических экспериментов"
+    },
+    {
+      "id": "cat_003",
+      "name": "buildings",
+      "display_name": "Открытия",
+      "icon_color": "#FFE66D",
+      "description": "Места наукчных открытий"
+    },
+    {
+      "id": "cat_004",
+      "name": "academies",
+      "display_name": "Организации",
+      "icon_color": "#95E1D3",
+      "description": "Образовательные суставов"
+    }
+  ],
+  "scientists": [
+    {
+      "id": "sci_001",
+      "name": "Dmitri Mendeleev",
+      "russian_name": "Дмитрий Менделеев",
+      "years": "1834-1907",
+      "major_contribution": "Посода периодического закона",
+      "importance_level": 5
+    },
+    {
+      "id": "sci_002",
+      "name": "Mikhail Lomonosov",
+      "russian_name": "Михаил Ломоносов",
+      "years": "1711-1765",
+      "major_contribution": "Основатель МОС",
+      "importance_level": 5
+    },
+    {
+      "id": "sci_003",
+      "name": "Ivan Pavlov",
+      "russian_name": "Иван Павлов",
+      "years": "1849-1936",
+      "major_contribution": "Теория рефлексов",
+      "importance_level": 4
+    },
+    {
+      "id": "sci_004",
+      "name": "Nikolay Beketov",
+      "russian_name": "Николай Бекетов",
+      "years": "1827-1911",
+      "major_contribution": "Работы в кинетике и энергетике",
+      "importance_level": 3
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "lm_001",
+      "name": "Памятник Менделееву",
+      "category_id": "cat_001",
+      "latitude": 59.9311,
+      "longitude": 30.3644,
+      "year_discovered": 1834,
+      "year_established": 1907,
+      "description": "Памятник креатору периодического закона. Был склады в память дейтельности динамичных научных утверждений.",
+      "scientists": ["sci_001"],
+      "important_facts": [
+        "Найважнейшее творчество 19 века",
+        "Стал фундаментом современной химии"
+      ],
+      "importance_level": 5,
+      "accessibility": "public",
+      "opening_hours": "24/7"
+    },
+    {
+      "id": "lm_002",
+      "name": "Академия наук",
+      "category_id": "cat_004",
+      "latitude": 59.9395,
+      "longitude": 30.3161,
+      "year_discovered": 1725,
+      "year_established": 1725,
+      "description": "Основана петром 1. Место родждения многих открытий в области химии.",
+      "scientists": ["sci_002", "sci_003", "sci_004"],
+      "important_facts": [
+        "Флагман науки России",
+        "Столица русской науки"
+      ],
+      "importance_level": 5,
+      "accessibility": "restricted",
+      "opening_hours": "09:00-18:00"
+    },
+    {
+      "id": "lm_003",
+      "name": "Лаборатория динамические системы",
+      "category_id": "cat_002",
+      "latitude": 59.9250,
+      "longitude": 30.3650,
+      "year_discovered": 1920,
+      "year_established": 1925,
+      "description": "Установка для образования работы над синтезом динамических частиц.",
+      "scientists": ["sci_003", "sci_004"],
+      "important_facts": [
+        "Читают эксперименты многие редистрибютивные"
+      ],
+      "importance_level": 3,
+      "accessibility": "private",
+      "opening_hours": "By appointment only"
+    }
+  ],
+  "site_configuration": {
+    "theme": "dark",
+    "language": "ru",
+    "sidebar_width": 300,
+    "map_height_percentage": 70,
+    "animation_enabled": true,
+    "animation_duration_ms": 300
+  },
+  "api_endpoints": {
+    "landmarks": "/api/v1/landmarks",
+    "scientists": "/api/v1/scientists",
+    "categories": "/api/v1/categories",
+    "search": "/api/v1/search"
+  },
+  "metadata": {
+    "total_landmarks": 3,
+    "total_scientists": 4,
+    "last_sync": "2025-12-12T11:45:00Z",
+    "data_quality_score": 0.95
+  }
+}
