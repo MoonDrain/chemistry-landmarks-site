@@ -1,27 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Landmark Data Analyzer
-Настоящий модуль используется для анализа и валидации
-данных о химических достопримечательностях Санкт-Петербурга.
-
-Основные функции:
-- Проверка наличия географических координат
-- Количественные аналитика данных
-- Статистика по датам открытий
-"""
 
 import json
-import re
 from dataclasses import dataclass
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Tuple
 from datetime import datetime
 from collections import defaultdict
 
 
 @dataclass
 class ChemicalLandmark:
-    """Класс для репрезентации химической достопримечательности"""
     id: str
     name: str
     latitude: float
@@ -29,23 +17,21 @@ class ChemicalLandmark:
     year_discovered: int
     description: str
     scientists: List[str]
-    discovery_type: str  # тип: 'synthesis', 'analysis', 'discovery', 'monument'
-    importance_level: int  # 1-5, где 5 - наивысшая
+    discovery_type: str
+    importance_level: int  
 
     def validate(self) -> Tuple[bool, str]:
-        """Проверить корректность данных"""
         if not (-90 <= self.latitude <= 90):
-            return False, f"Некорректная широта: {self.latitude}"
+            return False, f"Invalid latitude: {self.latitude}"
         if not (-180 <= self.longitude <= 180):
-            return False, f"Некорректная долгота: {self.longitude}"
+            return False, f"Invalid longitude: {self.longitude}"
         if not (1 <= self.importance_level <= 5):
-            return False, f"Опасная степень значимости: {self.importance_level}"
+            return False, f"Invalid importance level: {self.importance_level}"
         if self.year_discovered < 1600 or self.year_discovered > datetime.now().year:
-            return False, f"Нереалистичный год: {self.year_discovered}"
-        return True, "Данные корректные"
+            return False, f"Invalid year: {self.year_discovered}"
+        return True, "Data is valid"
 
     def to_dict(self) -> Dict:
-        """Преобразовать в словарь"""
         return {
             'id': self.id,
             'name': self.name,
@@ -60,25 +46,21 @@ class ChemicalLandmark:
 
 
 class LandmarkAnalyzer:
-    """Класс для анализа и обработки данных достопримечательностей"""
-
     def __init__(self):
         self.landmarks: List[ChemicalLandmark] = []
         self.errors: List[str] = []
 
     def add_landmark(self, landmark: ChemicalLandmark) -> bool:
-        """Добавить новую достопримечательность"""
         is_valid, message = landmark.validate()
         if not is_valid:
-            self.errors.append(f"Ошибка для {landmark.name}: {message}")
+            self.errors.append(f"Error for {landmark.name}: {message}")
             return False
         self.landmarks.append(landmark)
         return True
 
     def get_statistics(self) -> Dict:
-        """Получить статистику по достопримечательностям"""
         if not self.landmarks:
-            return {"total": 0, "message": "Нет данных"}
+            return {"total": 0, "message": "No data"}
 
         discovery_types = defaultdict(int)
         avg_importance = 0
@@ -105,11 +87,9 @@ class LandmarkAnalyzer:
         }
 
     def get_landmarks_by_type(self, discovery_type: str) -> List[ChemicalLandmark]:
-        """Получить достопримечательности по типу"""
         return [lm for lm in self.landmarks if lm.discovery_type == discovery_type]
 
     def export_to_json(self, filename: str) -> bool:
-        """Экспортировать данные в JSON"""
         try:
             data = {
                 'landmarks': [lm.to_dict() for lm in self.landmarks],
@@ -120,24 +100,21 @@ class LandmarkAnalyzer:
                 json.dump(data, f, ensure_ascii=False, indent=2)
             return True
         except Exception as e:
-            self.errors.append(f"Ошибка ЭКСПОРТА: {str(e)}")
+            self.errors.append(f"Export error: {str(e)}")
             return False
 
     def print_report(self) -> str:
-        """Набечатать отчёт
-        НОВОЕ ПОКОЛЕНИЕ ХИМИЧЕСКИХ ОТКРЫТИЙ
-        """
         if not self.landmarks:
-            return "ЭОНОМНая база данных!"
+            return "No landmarks in database"
 
         stats = self.get_statistics()
         report = [
-            "\n=== ОТЧЁТ О ХИМИЧЕСКИХ ДОСТОПРИМЕЧАТЕЛЬНОСТПХ ===",
-            f"\nВсего достопримечательностей: {stats['total_landmarks']}",
-            f"Средняя важность: {stats['average_importance']}/5",
-            f"Нашие открытия: {stats['earliest_discovery']}-{stats['latest_discovery']}",
-            f"\nОряд исоредіжх работ: {stats['discovery_types_distribution']}",
-            f"\nТоп-3 важнейших достопримечательностей:"
+            "\n=== CHEMICAL LANDMARKS REPORT ===",
+            f"\nTotal landmarks: {stats['total_landmarks']}",
+            f"Average importance: {stats['average_importance']}/5",
+            f"Discovery range: {stats['earliest_discovery']}-{stats['latest_discovery']}",
+            f"\nDiscovery types: {stats['discovery_types_distribution']}",
+            f"\nTop 3 most important landmarks:"
         ]
         for i, landmark_name in enumerate(stats['most_important_landmarks'], 1):
             report.append(f"  {i}. {landmark_name}")
@@ -146,40 +123,38 @@ class LandmarkAnalyzer:
 
 
 def main():
-    """Основная функция для тестирования"""
     analyzer = LandmarkAnalyzer()
 
-    # Примеры данных
     landmarks_data = [
         ChemicalLandmark(
             id="land_001",
-            name="Наментов трон (Партгиеноу)",
+            name="Mendeleev Memorial",
             latitude=59.9311,
             longitude=30.3644,
             year_discovered=1834,
-            description="Памятник крупнейшему русскому химику",
+            description="Monument to the greatest Russian chemist",
             scientists=["Dmitri Mendeleev"],
             discovery_type="monument",
             importance_level=5
         ),
         ChemicalLandmark(
             id="land_002",
-            name="Лаборатория Науки",
+            name="Science Laboratory",
             latitude=59.9395,
             longitude=30.3161,
             year_discovered=1925,
-            description="Место где начиналась революция в химии",
+            description="Birthplace of chemistry revolution",
             scientists=["Ivan Pavlov", "Nikolay Beketov"],
             discovery_type="synthesis",
             importance_level=4
         ),
         ChemicalLandmark(
             id="land_003",
-            name="Академия васпитания",
+            name="Academy of Sciences",
             latitude=59.9311,
             longitude=30.3850,
             year_discovered=1775,
-            description="Первая поля численных открытий",
+            description="First major scientific discoveries center",
             scientists=["Mikhail Lomonosov"],
             discovery_type="discovery",
             importance_level=5
@@ -189,20 +164,17 @@ def main():
     for landmark in landmarks_data:
         analyzer.add_landmark(landmark)
 
-    # Овывод наиденных неопределённых
     print(analyzer.print_report())
 
-    # Оайск типов
-    print("\nОткрытия монументов:")
+    print("\nMonuments:")
     for landmark in analyzer.get_landmarks_by_type("monument"):
         print(f"  - {landmark.name}")
 
-    # Экспорт
     if analyzer.export_to_json('landmarks_export.json'):
-        print("\nДанные успешно экспортированы в landmarks_export.json")
+        print("\nData successfully exported to landmarks_export.json")
 
     if analyzer.errors:
-        print("\nОшибки:")
+        print("\nErrors:")
         for error in analyzer.errors:
             print(f"  ⚠️ {error}")
 

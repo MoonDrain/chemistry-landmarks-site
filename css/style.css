@@ -1,15 +1,14 @@
-/* Определение CSS переменных для цветовой палитры */
+
 :root {
-    --color-bg-page: #1a1a1a; /* Основной фон страницы (очень темный) */
-    --color-bg-card: #331f33; /* Фон карточек и основных блоков (темно-фиолетовый) */
-    --color-text-primary: #e6aff0; /* Основной цвет текста (светло-розовый/сиреневый) */
-    --color-heading: #f0d4d4; /* Цвет заголовков и акцентов (бледно-розовый/бежевый) */
-    --color-interactive: #804f80; /* Цвет для наведения, активных элементов, подзаголовков (сиренево-фиолетовый) */
-    --color-border: rgba(255, 255, 255, 0.15); /* Светлая граница или разделитель */
-    --color-shadow: rgba(0, 0, 0, 0.5); /* Цвет тени */
+    --color-bg-page: #1a1a1a;
+    --color-bg-card: #331f33;
+    --color-text-primary: #e6aff0;
+    --color-heading: #f0d4d4;
+    --color-interactive: #804f80;
+    --color-border: rgba(255, 255, 255, 0.15);
+    --color-shadow: rgba(0, 0, 0, 0.5);
 }
 
-/* Общие стили для всей страницы */
 html, body {
     margin: 0;
     padding: 0;
@@ -35,7 +34,6 @@ body {
     overflow: hidden;
 }
 
-/* --- Стили для сайдбара --- */
 .sidebar {
     width: 80px;
     background-color: var(--color-bg-card);
@@ -62,7 +60,6 @@ body {
     box-shadow: 0 4px 8px var(--color-shadow);
 }
 
-/* --- Стили для основного контента --- */
 .main-content {
     flex-grow: 1;
     padding: 25px;
@@ -89,7 +86,6 @@ body {
     font-weight: 600;
 }
 
-/* --- Стили для двухколоночной структуры (инфо-блоки/фото и карта) --- */
 .page-body-columns {
     display: flex;
     flex-grow: 1;
@@ -100,32 +96,21 @@ body {
     padding-bottom: 20px;
 }
 
-/* Левая колонка для информационных блоков И ФОТО */
 .info-column-left {
-    /* Изначальное состояние: СКРЫТА */
     flex: 0 0 0%;
     width: 0;
     opacity: 0;
     padding-left: 0;
     padding-right: 0;
     margin-right: 0;
-
-    /* Внутреннее расположение элементов + Скроллинг */
     display: flex;
     flex-direction: column;
     gap: 20px;
-
-    /* Добавлен вертикальный скроллинг */
     overflow-y: auto;
     overflow-x: hidden;
-
-    /* Гарантируем, что элемент будет занимать высоту и скроллить контент */
     height: 100%;
     min-height: 0;
-
     transition: flex-basis 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.5s ease-in-out, padding 0.5s ease-in-out, margin-right 0.5s ease-in-out;
-
-    /* --- Стилизация скроллбара (Webkit) --- */
     &::-webkit-scrollbar {
         width: 8px;
     }
@@ -145,14 +130,12 @@ body {
         background: var(--color-heading);
     }
 
-    /* --- Стилизация скроллбара для Firefox --- */
     scrollbar-color: var(--color-interactive) var(--color-bg-card);
     scrollbar-width: thin;
 }
 
-/* Состояние, когда инфо-колонка видима (для больших экранов) */
 .page-body-columns.show-info .info-column-left {
-    flex: 0 0 35%; /* Ширина 35% на больших экранах */
+    flex: 0 0 35%;
     width: 35%;
     opacity: 1;
     padding-left: 20px;
@@ -160,12 +143,10 @@ body {
     margin-right: 20px;
 }
 
-/* Добавляем gap только когда инфо-колонка видима */
 .page-body-columns.show-info {
     gap: 20px;
 }
 
-/* Стили для info-block */
 .info-block {
     background-color: rgba(255, 255, 255, 0.08);
     padding: 20px;
@@ -188,7 +169,6 @@ body {
     font-weight: 600;
 }
 
-/* Правая колонка для карты */
 .map-column-right {
     flex: 1 1 auto;
     display: flex;
@@ -206,7 +186,6 @@ body {
     flex-grow: 1;
 }
 
-/* Стили для блока с фотографией */
 #landmark-photo-container {
     margin-top: 0;
     width: 100%;
@@ -228,24 +207,20 @@ body {
     max-height: 300px;
 }
 
-
-/* --- Стили для элементов управления Leaflet --- */
 .leaflet-control-container .leaflet-top.leaflet-left { margin-top: 10px; margin-left: 10px; }
 .leaflet-control-zoom a { background-color: var(--color-bg-card) !important; color: var(--color-text-primary) !important; border-color: var(--color-border) !important; width: 30px !important; height: 30px !important; line-height: 30px !important; font-size: 1.5em !important; border-radius: 4px !important; text-decoration: none !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 1px 5px rgba(0,0,0,0.3) !important; }
 .leaflet-control-zoom a:hover { background-color: var(--color-interactive) !important; color: white !important; }
 
-/* --- Стилизация попапов (Обновлено) --- */
 .leaflet-popup-content-wrapper {
     background-color: var(--color-bg-card) !important;
     color: var(--color-text-primary) !important;
     border-radius: 8px !important;
     box-shadow: 0 3px 14px var(--color-shadow) !important;
-    padding: 0 !important; /* Паддинг управляется margin контента */
+    padding: 0 !important;
 }
 
 .leaflet-popup-content {
-    /* УВЕЛИЧЕНЫ ОТСТУПЫ ВОКРУГ ТЕКСТА */
-    margin: 20px 25px 20px !important; /* Верх Право Низ Лево */
+    margin: 20px 25px 20px !important;
     font-size: 14px;
 }
 
@@ -254,9 +229,8 @@ body {
     box-shadow: 0 3px 14px var(--color-shadow) !important;
 }
 
-/* --- НОВОЕ: Скрываем кнопку закрытия попапа --- */
 .leaflet-popup-close-button {
-    display: none !important; /* Полностью скрываем элемент кнопки */
+    display: none !important;
 }
 
 
@@ -269,10 +243,6 @@ body {
     border-radius: 4px 0 0 0 !important;
 }
 
-
-/* --- Адаптивность (Медиа-запросы) --- */
-
-/* Стили для экранов с шириной до 768px */
 @media (max-width: 768px) {
     .main-content {
         margin: 15px;
@@ -297,9 +267,3 @@ body {
         min-height: 300px;
     }
 }
-
-/* ... (опциональные медиа-запросы для еще меньших экранов) ... */
-
-
-/* --- ЗАКОММЕНТИРОВАННЫЕ СТАРЫЕ СТИЛИ --- */
-/* ... (эти стили закомментированы или удалены) ... */
